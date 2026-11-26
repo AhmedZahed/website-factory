@@ -1,0 +1,19 @@
+kind = "web"
+previewPath = "/"
+title = "Website Factory"
+description = "An Arabic-first Phase 1 foundation for a multi-tenant website-building SaaS."
+version = "1.0.0"
+id = "artifacts/website-factory"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/", "/api/health" ]
+localPort = 21686
+
+[services.development]
+run = "pnpm --filter @workspace/website-factory run dev"
+
+[services.env]
+PORT = "21686"
+BASE_PATH = "/"

@@ -1,0 +1,32 @@
+---
+import "../styles/global.css";
+import WebsiteFactoryApp, {
+  type WebsiteFactoryPage,
+} from "../components/WebsiteFactoryApp";
+
+interface Props {
+  page: WebsiteFactoryPage;
+  title: string;
+  description: string;
+}
+
+const { page, title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <WebsiteFactoryApp page={page} client:load />
+  </body>
+</html>
