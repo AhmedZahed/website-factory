@@ -1,0 +1,82 @@
+.template-preview-toolbar {
+  position: sticky;
+  z-index: 20;
+  top: 0;
+  display: flex;
+  min-height: 52px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 8px clamp(16px, 5vw, 64px);
+  border-bottom: 1px solid #e4dfd4;
+  color: #202b40;
+  background: rgba(251, 250, 246, 0.97);
+  font: 500 12px/1.4 "DM Sans", "IBM Plex Sans Arabic", sans-serif;
+  backdrop-filter: blur(12px);
+}
+
+.template-preview-back,
+.template-preview-language {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid #d9d4c9;
+  border-radius: 7px;
+  padding: 0 11px;
+  color: #202b40;
+  background: transparent;
+  font: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.template-preview-back:hover,
+.template-preview-language:hover {
+  border-color: #337b6e;
+  color: #24695e;
+  background: #f4f7f2;
+}
+
+.template-preview-language {
+  cursor: pointer;
+}
+
+.template-preview-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #68716f;
+  text-align: center;
+}
+
+.template-preview-name span {
+  color: #a6aca5;
+}
+
+.template-preview-toolbar a:focus-visible,
+.template-preview-toolbar button:focus-visible {
+  outline: 3px solid #337b6e;
+  outline-offset: 3px;
+}
+
+@media (max-width: 560px) {
+  .template-preview-toolbar {
+    min-height: 48px;
+    gap: 8px;
+    padding-inline: 10px;
+  }
+
+  .template-preview-back,
+  .template-preview-language {
+    min-height: 32px;
+    gap: 5px;
+    padding-inline: 8px;
+    font-size: 10px;
+  }
+
+  .template-preview-name {
+    display: none;
+  }
+}

@@ -1,0 +1,295 @@
+.template-gallery {
+  --gallery-ink: #202b40;
+  --gallery-muted: #707783;
+  --gallery-line: #e4dfd4;
+  width: 100%;
+}
+
+.template-gallery-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 8px 0 28px;
+}
+
+.template-gallery-heading > div {
+  max-width: 650px;
+}
+
+.template-gallery-eyebrow {
+  margin: 0 0 7px;
+  color: #337b6e;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.template-gallery-heading h2 {
+  margin: 0;
+  color: var(--gallery-ink);
+  font-size: clamp(24px, 3vw, 34px);
+  letter-spacing: -0.04em;
+}
+
+.template-gallery-heading p:last-child {
+  margin: 10px 0 0;
+  color: var(--gallery-muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.template-gallery-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 13px;
+  border: 1px solid var(--gallery-line);
+  border-radius: 999px;
+  color: #337b6e;
+  background: #fbfaf6;
+  font: 700 13px/1 "DM Sans", sans-serif;
+}
+
+.template-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.template-gallery-card {
+  overflow: hidden;
+  border: 1px solid var(--gallery-line);
+  border-radius: 15px;
+  background: #fbfaf6;
+  box-shadow: 0 8px 24px rgba(28, 39, 54, 0.035);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.template-gallery-card:hover {
+  transform: translateY(-3px);
+  border-color: #c5d6cf;
+  box-shadow: 0 16px 34px rgba(28, 39, 54, 0.09);
+}
+
+.template-gallery-preview {
+  display: block;
+  position: relative;
+  min-height: 186px;
+  padding: 14px;
+  overflow: hidden;
+  background: #edf1eb;
+}
+
+.template-gallery-browser {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 18px;
+}
+
+.template-gallery-browser i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.35;
+}
+
+.template-gallery-sample {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  min-height: 140px;
+  padding: 18px;
+  overflow: hidden;
+  border-radius: 9px;
+  background: var(--sample-bg, #fff);
+  color: var(--sample-ink, #202b40);
+}
+
+.template-gallery-sample-mark {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  color: var(--sample-bg, #fff);
+  background: var(--sample-accent, #337b6e);
+  font-weight: 800;
+  font-size: 12px;
+}
+
+.template-gallery-sample-lines {
+  display: grid;
+  gap: 6px;
+  width: 56%;
+}
+
+.template-gallery-sample-lines i {
+  height: 5px;
+  border-radius: 999px;
+  background: var(--sample-ink, #202b40);
+  opacity: 0.22;
+}
+
+.template-gallery-sample-lines i:first-child {
+  width: 72%;
+  height: 9px;
+  opacity: 0.78;
+}
+
+.template-gallery-sample-art {
+  position: absolute;
+  inset-block: 20px 0;
+  inset-inline-end: 18px;
+  width: 34%;
+  border-radius: 45% 45% 5px 5px;
+  background:
+    linear-gradient(145deg, transparent 42%, var(--sample-accent, #337b6e) 43%),
+    var(--sample-soft, #d9e7df);
+  opacity: 0.9;
+}
+
+.template-gallery-preview-tag {
+  position: absolute;
+  inset-inline-end: 22px;
+  bottom: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 9px;
+  border: 1px solid rgba(32, 43, 64, 0.1);
+  border-radius: 999px;
+  color: #202b40;
+  background: rgba(251, 250, 246, 0.9);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.template-gallery-card[data-template="services-maintenance"] {
+  --sample-bg: #f7f6ef;
+  --sample-ink: #173b45;
+  --sample-accent: #286f68;
+  --sample-soft: #c9e4dd;
+}
+
+.template-gallery-card[data-template="contracting-real-estate"] {
+  --sample-bg: #f5f0e8;
+  --sample-ink: #263b50;
+  --sample-accent: #b76343;
+  --sample-soft: #d6c09b;
+}
+
+.template-gallery-card[data-template="corporate-professional"] {
+  --sample-bg: #f8f9fc;
+  --sample-ink: #182e57;
+  --sample-accent: #526e98;
+  --sample-soft: #dae2f0;
+}
+
+.template-gallery-card[data-template="restaurants-cafes-juice"] {
+  --sample-bg: #fff6e9;
+  --sample-ink: #562a27;
+  --sample-accent: #d66e42;
+  --sample-soft: #f3dda5;
+}
+
+.template-gallery-card[data-template="shops-personal-services"] {
+  --sample-bg: #f8f4e9;
+  --sample-ink: #4a443b;
+  --sample-accent: #527966;
+  --sample-soft: #f0d37d;
+}
+
+.template-gallery-card[data-template="law-firms-legal"] {
+  --sample-bg: #f8f5ee;
+  --sample-ink: #1f323c;
+  --sample-accent: #8a6d47;
+  --sample-soft: #d4c49e;
+}
+
+.template-gallery-card-copy {
+  position: relative;
+  padding: 20px 20px 17px;
+}
+
+.template-gallery-number {
+  color: #81908b;
+  font: 700 11px/1 "DM Sans", sans-serif;
+  letter-spacing: 0.08em;
+}
+
+.template-gallery-card-copy h3 {
+  margin: 8px 0 6px;
+  color: var(--gallery-ink);
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+.template-gallery-card-copy > p {
+  min-height: 48px;
+  margin: 0;
+  color: var(--gallery-muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.template-gallery-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--gallery-line);
+  color: var(--gallery-muted);
+  font-size: 10px;
+}
+
+.template-gallery-card-footer a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #286f68;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.template-gallery-card-footer a:hover {
+  color: #173b45;
+}
+
+@media (max-width: 1050px) {
+  .template-gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .template-gallery-heading {
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .template-gallery-heading p:last-child {
+    font-size: 12px;
+  }
+
+  .template-gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .template-gallery-card {
+    transition: none;
+  }
+}
