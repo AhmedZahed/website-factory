@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { createInterface } from "node:readline";
+import { createInterface } from "node:readline/promises";
 
 const configuredUrl =
   process.env.WEBSITE_FACTORY_AUTH_TEST_URL ?? "http://localhost:80";
