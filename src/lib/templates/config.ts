@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { TEMPLATE_SECTION_TYPES } from "./types";
+import { TEMPLATE_SECTION_TYPES } from "./types.ts";
 
 const imageSourceSchema = z
   .string()
@@ -73,8 +73,23 @@ export const templateCustomizationSchema = z
       .strict(),
     images: z
       .object({
-        hero: imageSourceSchema.optional(),
-        gallery: z.array(imageSourceSchema).max(24),
+        hero: z
+          .object({
+            src: imageSourceSchema,
+            alt: localizedTextSchema,
+          })
+          .strict()
+          .optional(),
+        gallery: z
+          .array(
+            z
+              .object({
+                src: imageSourceSchema,
+                alt: localizedTextSchema,
+              })
+              .strict(),
+          )
+          .max(24),
       })
       .strict(),
     sections: z

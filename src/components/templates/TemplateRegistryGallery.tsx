@@ -1,4 +1,4 @@
-import { ArrowUpLeft, Eye, Layers3 } from "lucide-react";
+import { ArrowUpLeft, ArrowUpRight, Eye, Layers3 } from "lucide-react";
 import { TEMPLATE_REGISTRY } from "../../lib/templates/registry";
 import type { TemplateLanguage } from "../../lib/templates/types";
 import "./template-gallery.css";
@@ -11,6 +11,7 @@ const copy = {
     sections: "أقسام مدعومة",
     preview: "معاينة القالب",
     demo: "بيانات توضيحية",
+    count: "قوالب",
   },
   en: {
     eyebrow: "Template library",
@@ -19,6 +20,7 @@ const copy = {
     sections: "Supported sections",
     preview: "Preview template",
     demo: "Demo content",
+    count: "templates",
   },
 } satisfies Record<TemplateLanguage, Record<string, string>>;
 
@@ -38,7 +40,11 @@ export function TemplateRegistryGallery({
           <h2 id="template-gallery-title">{labels.title}</h2>
           <p>{labels.intro}</p>
         </div>
-        <span className="template-gallery-count" aria-label={`${TEMPLATE_REGISTRY.length}`}>
+        <span
+          className="template-gallery-count"
+          data-testid="text-template-count"
+          aria-label={`${TEMPLATE_REGISTRY.length} ${labels.count}`}
+        >
           <Layers3 size={16} aria-hidden="true" />
           {TEMPLATE_REGISTRY.length.toString().padStart(2, "0")}
         </span>
@@ -48,11 +54,13 @@ export function TemplateRegistryGallery({
         {TEMPLATE_REGISTRY.map((template, index) => (
           <article
             className="template-gallery-card"
+            data-testid={`card-template-${template.id}`}
             data-template={template.category}
             key={template.id}
           >
             <a
               className="template-gallery-preview"
+              data-testid={`link-template-preview-image-${template.id}`}
               href={`/admin/templates/preview/${template.id}`}
               aria-label={`${labels.preview}: ${template.name[language]}`}
             >
@@ -82,19 +90,18 @@ export function TemplateRegistryGallery({
               <span className="template-gallery-number">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <h3>{template.name[language]}</h3>
-              <p>{template.description[language]}</p>
+              <h3 data-testid={`text-template-name-${template.id}`}>{template.name[language]}</h3>
+              <p data-testid={`text-template-description-${template.id}`}>{template.description[language]}</p>
               <div className="template-gallery-card-footer">
                 <span>
                   {template.supportedSections.length} {labels.sections}
                 </span>
-                <a href={`/admin/templates/preview/${template.id}`}>
+                <a
+                  href={`/admin/templates/preview/${template.id}`}
+                  data-testid={`link-template-preview-${template.id}`}
+                >
                   {labels.preview}
-                  {isArabic ? (
-                    <ArrowUpLeft size={15} aria-hidden="true" />
-                  ) : (
-                    <ArrowUpLeft size={15} aria-hidden="true" />
-                  )}
+                  {isArabic ? <ArrowUpLeft size={15} aria-hidden="true" /> : <ArrowUpRight size={15} aria-hidden="true" />}
                 </a>
               </div>
             </div>

@@ -84,8 +84,14 @@ export interface TemplateCustomization {
     };
   };
   images: {
-    hero?: string;
-    gallery: string[];
+    hero?: {
+      src: string;
+      alt: LocalizedText;
+    };
+    gallery: Array<{
+      src: string;
+      alt: LocalizedText;
+    }>;
   };
   sections: Array<{
     id: string;

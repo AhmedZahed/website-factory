@@ -1,4 +1,4 @@
-import type { TemplateDefinition } from "./types";
+import type { TemplateDefinition } from "./types.ts";
 
 export const TEMPLATE_REGISTRY = [
   {

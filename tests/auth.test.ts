@@ -27,6 +27,7 @@ test("password hashes verify without storing the original password", async () =>
 test("private routes require authentication except health and login/logout", () => {
   assert.equal(isProtectedPath("/admin"), true);
   assert.equal(isProtectedPath("/admin/customers"), true);
+  assert.equal(isProtectedPath("/admin/templates/preview/builtin-law-firms-legal"), true);
   assert.equal(isProtectedPath("/api/customers"), true);
   assert.equal(isProtectedPath("/api/auth/me"), true);
   assert.equal(isProtectedPath("/api/health"), false);
@@ -77,6 +78,18 @@ test("staff can access only explicitly permitted customer routes", () => {
     false,
   );
   assert.equal(
+    canAccessPrivateRoute("staff", "/admin/templates", "GET"),
+    false,
+  );
+  assert.equal(
+    canAccessPrivateRoute(
+      "staff",
+      "/admin/templates/preview/builtin-law-firms-legal",
+      "GET",
+    ),
+    false,
+  );
+  assert.equal(
     canAccessPrivateRoute("staff", "/api/auth/me", "POST"),
     false,
   );
@@ -86,6 +99,14 @@ test("staff can access only explicitly permitted customer routes", () => {
   );
   assert.equal(
     canAccessPrivateRoute("admin", "/api/reports/export", "GET"),
+    true,
+  );
+  assert.equal(
+    canAccessPrivateRoute(
+      "admin",
+      "/admin/templates/preview/builtin-law-firms-legal",
+      "GET",
+    ),
     true,
   );
 });

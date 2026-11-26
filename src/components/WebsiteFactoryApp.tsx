@@ -16,6 +16,7 @@ import {
   UsersRound,
   WandSparkles,
 } from 'lucide-react';
+import { TemplateRegistryGallery } from './templates/TemplateRegistryGallery';
 
 export type WebsiteFactoryPage =
   | 'home'
@@ -111,7 +112,7 @@ const text = {
     foundationC: 'القوالب والطلبات',
     foundationCDesc: 'مساحات مهيأة لتتكامل مع بنية المنتج مستقبلاً.',
     statusNotConnected: 'غير متصل',
-    phaseOne: 'المرحلة الثالثة',
+    phaseOne: 'المرحلة 4A',
     noteTitle: 'لا توجد سجلات بعد',
     noteText: 'لا توجد بيانات أو حسابات أو نشاط تشغيلي معروض في هذه المعاينة.',
     previewFooter: 'الواجهة التأسيسية لا تتضمن عمليات فعلية أو بيانات مرتبطة.',
@@ -187,7 +188,7 @@ const text = {
     foundationC: 'Templates and orders',
     foundationCDesc: 'Spaces prepared to connect to the product foundation in the future.',
     statusNotConnected: 'Not connected',
-    phaseOne: 'Phase 3',
+    phaseOne: 'Phase 4A',
     noteTitle: 'No records yet',
     noteText: 'No data, accounts, or operational activity is displayed in this preview.',
     previewFooter: 'The foundation interface includes no live operations or connected records.',
@@ -400,7 +401,9 @@ function AdminPage({ page, language, labels, onToggle }: { page: Exclude<Website
             <div><strong>{labels.bannerTitle}</strong><p>{labels.bannerText}</p></div>
           </section>
 
-          {isDashboard ? (
+          {page === 'templates' ? (
+            <TemplateRegistryGallery language={language} />
+          ) : isDashboard ? (
             <div className="wf-overview-grid">
               <section className="wf-panel" aria-labelledby="wf-foundation-title">
                 <header className="wf-panel-heading"><h2 id="wf-foundation-title">{labels.foundationTitle}</h2><p>{labels.foundationSubtitle}</p></header>

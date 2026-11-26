@@ -1,9 +1,9 @@
 import type {
   TemplateCustomization,
   TemplateDefinition,
-  TemplateId,
   TemplateSectionType,
-} from "./types";
+} from "./types.ts";
+import type { TemplateId } from "./registry.ts";
 
 interface DemoItem {
   title: { ar: string; en: string };

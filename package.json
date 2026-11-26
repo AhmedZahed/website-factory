@@ -11,6 +11,7 @@
     "db:migrate:local": "wrangler d1 migrations apply website-factory --local",
     "auth:create-account": "node --experimental-strip-types ./scripts/create-account.mjs",
     "test:auth": "node --experimental-strip-types --test tests/auth.test.ts",
+    "test:templates": "node --experimental-strip-types --test tests/templates.test.ts",
     "test:auth:integration": "node --experimental-strip-types ./tests/auth.integration.mjs",
     "test:auth:live": "node ./tests/auth.live.mjs"
   },

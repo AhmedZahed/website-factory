@@ -16,3 +16,7 @@ The customer migration is additive: it keeps the original `websites` columns and
 `customers.phone` and `customers.email` are nullable for legacy tenants that had no contact details. API-created customers are validated server-side; IDs and timestamps are server-owned. Customer deletion is restricted while any website references that customer.
 
 The admin-auth migration adds only `admin_accounts` and `auth_login_attempts`; it creates no credentials and does not rewrite existing customer, tenant, user, or website rows. Session data is stored by Astro's Cloudflare KV session driver through the adapter-managed `SESSION` binding.
+
+Phase 4A adds `website_pages`, `website_sections`, and `website_page_sections` in migration `0004_template_engine.sql`. Pages are localized by `ar`/`en`; sections can be reused across pages for the same website. Composite foreign keys prevent attaching a page and section from different websites. The migration only creates new tables/indexes and inserts built-in template rows with `INSERT OR IGNORE`; it does not update or delete existing rows.
+
+Website customization uses the existing `website_settings.settings_json` column and is validated by the versioned template customization schema. The preview pages use static demo data and do not query customer, website, or authentication records.

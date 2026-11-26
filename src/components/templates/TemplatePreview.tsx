@@ -173,7 +173,7 @@ function localized(value: unknown, language: TemplateLanguage, fallback: string)
   return fallback;
 }
 
-function sectionItems(section: TemplateSectionType, content: Record<string, unknown>, language: TemplateLanguage): DemoItem[] {
+function sectionItems(section: TemplateSectionType, content: Record<string, unknown>): DemoItem[] {
   const possible = content.items ?? content.entries ?? content.cards;
   if (Array.isArray(possible)) {
     const parsed = possible.flatMap((item, index) => {
@@ -229,17 +229,17 @@ function ContactLinks({ customization, language }: { customization: TemplateCust
   const ar = language === "ar";
   return (
     <div className="tp-contact-actions">
-      {phone && <a className="tp-contact-link" href={`tel:${safeHref(phone)}`}><Phone size={16} aria-hidden="true" />{phone}</a>}
-      {whatsapp && <a className="tp-contact-link" href={`https://wa.me/${safeHref(whatsapp).replace(/\+/g, "")}`} target="_blank" rel="noopener noreferrer"><MessageCircle size={16} aria-hidden="true" />{ar ? "واتساب" : "WhatsApp"}</a>}
-      {appointment && <a className="tp-contact-link" href={appointment} target="_blank" rel="noopener noreferrer"><CalendarDays size={16} aria-hidden="true" />{ar ? "حجز موعد" : "Book an appointment"}</a>}
-      {email && <a className="tp-contact-link" href={`mailto:${email}`}><ArrowUpRight size={16} aria-hidden="true" />{email}</a>}
+      {phone && <a className="tp-contact-link" data-testid="link-preview-phone" href={`tel:${safeHref(phone)}`}><Phone size={16} aria-hidden="true" />{phone}</a>}
+      {whatsapp && <a className="tp-contact-link" data-testid="link-preview-whatsapp" href={`https://wa.me/${safeHref(whatsapp).replace(/\+/g, "")}`} target="_blank" rel="noopener noreferrer"><MessageCircle size={16} aria-hidden="true" />{ar ? "واتساب" : "WhatsApp"}</a>}
+      {appointment && <a className="tp-contact-link" data-testid="link-preview-appointment" href={appointment} target="_blank" rel="noopener noreferrer"><CalendarDays size={16} aria-hidden="true" />{ar ? "حجز موعد" : "Book an appointment"}</a>}
+      {email && <a className="tp-contact-link" data-testid="link-preview-email" href={`mailto:${email}`}><ArrowUpRight size={16} aria-hidden="true" />{email}</a>}
       {address && <span className="tp-contact-link"><MapPin size={16} aria-hidden="true" />{localized(address, language, ar ? "العنوان" : "Address")}</span>}
       {!phone && !whatsapp && !appointment && !email && !address && <p className="tp-contact-placeholder">{ar ? "أضف بيانات التواصل والعنوان بعد اعتمادها." : "Add confirmed contact details and address here."}</p>}
     </div>
   );
 }
 
-function Hero({ template, language, customization, content }: TemplatePreviewProps & { content: Record<string, unknown> }) {
+function Hero({ template, language, customization, content, hasContact }: TemplatePreviewProps & { content: Record<string, unknown>; hasContact: boolean }) {
   const ar = language === "ar";
   const name = localized(customization.business.name, language, ar ? "اسم النشاط التجاري" : "Business name");
   const tagline = localized(content.tagline ?? customization.business.tagline, language, ar ? "خدمة واضحة، واهتمام بكل تفصيل." : "Clear service, considered in every detail.");
@@ -253,12 +253,12 @@ function Hero({ template, language, customization, content }: TemplatePreviewPro
         <span className="tp-eyebrow"><span className="tp-eyebrow-rule" />{ar ? "نموذج تجريبي" : "DEMO PREVIEW"}</span>
         <h1 id="tp-hero-title">{localized(content.title, language, name)}<span>{tagline}</span></h1>
         <p>{description}</p>
-        <a className="tp-primary-cta" href="#tp-contact">{ar ? "لنتحدث" : "Let’s talk"}{ar ? <ArrowLeft size={16} /> : <ArrowRight size={16} />}</a>
+        {hasContact && <a className="tp-primary-cta" data-testid="link-preview-hero-contact" href="#tp-contact">{ar ? "لنتحدث" : "Let’s talk"}{ar ? <ArrowLeft size={16} /> : <ArrowRight size={16} />}</a>}
         <span className="tp-demo-note"><Check size={14} aria-hidden="true" />{ar ? "محتوى توضيحي قابل للتخصيص" : "Illustrative copy, ready to customize"}</span>
       </div>
       <div className="tp-hero-art" aria-label={ar ? "عنصر بصري تجريبي" : "Illustrative visual"}>
         {image
-          ? <img src={image} alt="" />
+          ? <img src={image.src} alt={localized(image.alt, language, name)} />
           : <div className="tp-art-composition" aria-hidden="true">
             <span className="tp-art-orbit" /><span className="tp-art-shape tp-art-shape-one" /><span className="tp-art-shape tp-art-shape-two" />
             <span className="tp-art-letter">{template.category === "law-firms-legal" ? "§" : template.category === "restaurants-cafes-juice" ? "01" : "W"}</span>
@@ -280,12 +280,12 @@ function ContentSection({ type, language, customization, content, index }: {
   const ar = language === "ar";
   const title = localized(content.heading ?? content.title, language, sectionTitles[type][language]);
   const intro = localized(content.intro ?? content.description, language, "");
-  const items = sectionItems(type, content, language);
+  const items = sectionItems(type, content);
   const Icon = sectionIcon[type] ?? Star;
   const legal = ["lawyer-intro", "practice-areas", "qualifications", "consultation", "articles", "accreditation"].includes(type);
   if (type === "contact") {
     return (
-      <section className={`tp-section tp-contact-section tp-section-${type}`} id="tp-contact" aria-labelledby={`tp-section-${index}`}>
+      <section className={`tp-section tp-contact-section tp-section-${type}`} id="tp-contact" data-testid={`section-preview-${type}-${index}`} aria-labelledby={`tp-section-${index}`}>
         <div className="tp-section-heading">
           <span className="tp-section-index">{String(index + 1).padStart(2, "0")} / {ar ? "تواصل" : "CONTACT"}</span>
           <h2 id={`tp-section-${index}`}>{title}</h2>
@@ -301,16 +301,16 @@ function ContentSection({ type, language, customization, content, index }: {
       : type === "qualifications" || type === "accreditation" ? "tp-credential-section"
         : "";
   return (
-    <section className={`tp-section tp-section-${type} ${variant}`} aria-labelledby={`tp-section-${index}`}>
+    <section id={`tp-section-${index}`} className={`tp-section tp-section-${type} ${variant}`} data-testid={`section-preview-${type}-${index}`} aria-labelledby={`tp-section-${index}`}>
       <div className="tp-section-heading">
-        <span className="tp-section-index">{String(index + 1).padStart(2, "0")} / {sectionTitles[type][language].en.toUpperCase()}</span>
+        <span className="tp-section-index">{String(index + 1).padStart(2, "0")} / {sectionTitles[type].en.toUpperCase()}</span>
         <h2 id={`tp-section-${index}`}>{title}</h2>
         {intro && <p>{intro}</p>}
       </div>
       {legal && <p className="tp-legal-demo">{ar ? "نص تجريبي — راجع المعلومات واعتمدها قبل النشر." : "Demo content — review and verify before publishing."}</p>}
       <div className={`tp-items tp-items-${type}`}>
         {items.map((item, itemIndex) => (
-          <article className="tp-item" key={`${type}-${itemIndex}`}>
+          <article className="tp-item" data-testid={`card-preview-${type}-${itemIndex + 1}`} key={`${type}-${itemIndex}`}>
             <span className="tp-item-icon" aria-hidden="true"><Icon size={18} strokeWidth={1.6} /></span>
             <div className="tp-item-copy">
               <h3>{item.title[language]}</h3>
@@ -324,8 +324,15 @@ function ContentSection({ type, language, customization, content, index }: {
       {type === "consultation" && <div className="tp-consultation-contact"><ContactLinks customization={customization} language={language} /></div>}
       {type === "testimonials" && <span className="tp-demo-note"><ShieldCheck size={14} aria-hidden="true" />{demoLabel[language]}</span>}
       {type === "gallery" && customization.images.gallery.length > 0 && (
-        <div className="tp-gallery">
-          {customization.images.gallery.slice(0, 6).map((src, i) => <img key={`${src}-${i}`} src={src} alt="" loading="lazy" />)}
+        <div className="tp-gallery" data-testid="gallery-preview">
+          {customization.images.gallery.slice(0, 6).map((image, i) => (
+            <img
+              key={`${image.src}-${i}`}
+              src={image.src}
+              alt={localized(image.alt, language, "")}
+              loading="lazy"
+            />
+          ))}
         </div>
       )}
       {type === "faq" && <span className="tp-faq-mark" aria-hidden="true"><ChevronDown size={17} /></span>}
@@ -351,6 +358,7 @@ export default function TemplatePreview({ template, language, customization }: T
         content: {},
       }));
   const navigationSections = visibleSections.filter((section) => section.type !== "hero");
+  const hasContactSection = visibleSections.some((section) => section.type === "contact");
   const navigationIndex = new Map(
     navigationSections.map((section, index) => [section.type, index + 1]),
   );
@@ -372,10 +380,10 @@ export default function TemplatePreview({ template, language, customization }: T
   } as CSSProperties;
 
   return (
-    <main id="tp-top" className={`tp-root tp-template-${template.category}`} dir={direction} lang={language} style={styles}>
-      <div className="tp-demo-ribbon"><span>{ar ? "معاينة تجريبية" : "DEMO PREVIEW"}</span><span>{template.name[language]}</span></div>
+    <main id="tp-top" className={`tp-root tp-template-${template.category}`} data-testid={`template-preview-${template.category}`} dir={direction} lang={language} style={styles}>
+      <div className="tp-demo-ribbon" data-testid="status-template-demo"><span>{ar ? "معاينة تجريبية" : "DEMO PREVIEW"}</span><span>{template.name[language]}</span></div>
       <header className="tp-header">
-        <a className="tp-brand" href="#tp-top" aria-label={businessName}>
+        <a className="tp-brand" data-testid="link-preview-brand" href="#tp-top" aria-label={businessName}>
           {customization.brand.logo
             ? <img className="tp-logo-image" src={customization.brand.logo.src} alt={localized(customization.brand.logo.alt, language, businessName)} />
             : <BrandMark category={template.category} />}
@@ -385,20 +393,21 @@ export default function TemplatePreview({ template, language, customization }: T
           {navigationSections.slice(0, 4).map((section) => (
             <a
               key={section.id}
+              data-testid={`link-preview-section-${section.type}-${navigationIndex.get(section.type)}`}
               href={section.type === "contact" ? "#tp-contact" : `#tp-section-${navigationIndex.get(section.type)}`}
             >
               {sectionTitles[section.type][language]}
             </a>
           ))}
         </nav>
-        <a className="tp-header-contact" href="#tp-contact">{ar ? "تواصل" : "Contact"}{ar ? <ArrowUpLeft size={15} /> : <ArrowUpRight size={15} />}</a>
+        {hasContactSection && <a className="tp-header-contact" data-testid="link-preview-contact-header" href="#tp-contact">{ar ? "تواصل" : "Contact"}{ar ? <ArrowUpLeft size={15} /> : <ArrowUpRight size={15} />}</a>}
       </header>
       {template.category === "law-firms-legal" && (
-        <aside className="tp-legal-notice"><Scale size={16} aria-hidden="true" /><span>{ar ? "معاينة توضيحية فقط — لا تتضمن مشورة قانونية أو بيانات اعتماد مؤكدة." : "Illustrative preview only — no legal advice or verified credentials are provided."}</span></aside>
+        <aside className="tp-legal-notice" data-testid="notice-legal-demo"><Scale size={16} aria-hidden="true" /><span>{ar ? "معاينة توضيحية فقط — لا تتضمن مشورة قانونية أو بيانات اعتماد مؤكدة." : "Illustrative preview only — no legal advice or verified credentials are provided."}</span></aside>
       )}
       <div className="tp-content-wrap">
         {visibleSections.map((section) => section.type === "hero"
-          ? <Hero key={section.id} template={template} language={language} customization={customization} content={section.content} />
+          ? <Hero key={section.id} template={template} language={language} customization={customization} content={section.content} hasContact={hasContactSection} />
           : <ContentSection
               key={section.id}
               type={section.type}
@@ -409,9 +418,9 @@ export default function TemplatePreview({ template, language, customization }: T
             />)}
       </div>
       <footer className="tp-footer">
-        <a className="tp-brand tp-footer-brand" href="#tp-top"><BrandMark category={template.category} /><span>{businessName}</span></a>
+        <a className="tp-brand tp-footer-brand" data-testid="link-preview-footer-brand" href="#tp-top"><BrandMark category={template.category} /><span>{businessName}</span></a>
         <span>{ar ? "محتوى تجريبي للمعاينة — لا يمثل سجلاً تجارياً حقيقياً." : "Demo preview content — no real business record is represented."}</span>
-        <a href="#tp-top" className="tp-back-top">{ar ? "للأعلى" : "Back to top"}<ArrowUpRight size={14} /></a>
+        <a href="#tp-top" className="tp-back-top" data-testid="link-preview-top">{ar ? "للأعلى" : "Back to top"}<ArrowUpRight size={14} /></a>
       </footer>
     </main>
   );

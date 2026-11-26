@@ -5,11 +5,12 @@ CREATE TABLE website_pages (
     REFERENCES websites(id) ON DELETE CASCADE,
   slug TEXT NOT NULL
     CHECK (
-      length(slug) BETWEEN 1 AND 120
-      AND slug = lower(slug)
-      AND slug NOT GLOB '*[^a-z0-9-]*'
-      AND slug NOT LIKE '-%'
-      AND slug NOT LIKE '%-'
+      length(trim(slug)) BETWEEN 1 AND 160
+      AND slug = trim(slug)
+      AND instr(slug, ' ') = 0
+      AND instr(slug, '/') = 0
+      AND instr(slug, '?') = 0
+      AND instr(slug, '#') = 0
     ),
   title TEXT NOT NULL CHECK (length(trim(title)) BETWEEN 1 AND 200),
   locale TEXT NOT NULL CHECK (locale IN ('ar', 'en')),

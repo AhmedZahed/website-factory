@@ -31,7 +31,7 @@ export function TemplatePreviewWorkspace({
         dir={isArabic ? "rtl" : "ltr"}
         lang={language}
       >
-        <a href="/admin/templates" className="template-preview-back">
+        <a href="/admin/templates" className="template-preview-back" data-testid="link-preview-back-to-gallery">
           {isArabic ? <ArrowUpRight size={16} aria-hidden="true" /> : <ArrowUpLeft size={16} aria-hidden="true" />}
           {isArabic ? "العودة إلى القوالب" : "Back to templates"}
         </a>
@@ -43,6 +43,7 @@ export function TemplatePreviewWorkspace({
         <button
           className="template-preview-language"
           type="button"
+          data-testid="button-preview-language-toggle"
           aria-label={isArabic ? "Switch preview to English" : "حوّل المعاينة إلى العربية"}
           aria-pressed={!isArabic}
           onClick={() => setLanguage(isArabic ? "en" : "ar")}
