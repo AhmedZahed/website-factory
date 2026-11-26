@@ -1,6 +1,6 @@
 # Website Factory
 
-An Arabic-first foundation for a multi-tenant website-building SaaS. It includes a public landing page, an admin UI preview, Cloudflare Workers SSR configuration, local D1/R2 bindings, D1 migrations, `GET /api/health`, and a Zod-validated customer API.
+An Arabic-first foundation for a multi-tenant website-building SaaS. It includes a public landing page, a protected admin workspace, Cloudflare Workers SSR configuration, local D1/R2 bindings, D1 migrations, `GET /api/health`, and a Zod-validated customer API.
 
 ## Run locally
 
@@ -26,16 +26,19 @@ This runs `wrangler d1 migrations apply website-factory --local`. It does not us
 
 - `pnpm --filter @workspace/website-factory run typecheck`
 - `pnpm --filter @workspace/website-factory run build`
+- `pnpm --filter @workspace/website-factory run test:auth`
+- `pnpm --filter @workspace/website-factory run test:auth:integration` (requires the managed preview and local D1 migrations)
 - `GET /api/health` returns `status`, `application`, and `environment`.
-- Customer API: `GET` and `POST /api/customers`, `PATCH` and `DELETE /api/customers/:id`.
-- D1 migrations: `0001_initial_schema.sql` and the additive `0002_customers_and_website_ownership.sql`.
+- Customer API (authenticated): `GET` and `POST /api/customers`, `PATCH` and `DELETE /api/customers/:id`.
+- D1 migrations: `0001_initial_schema.sql`, `0002_customers_and_website_ownership.sql`, and `0003_admin_auth.sql`.
+- Create an admin or staff account using `pnpm --filter @workspace/website-factory run auth:create-account`. The password is entered without terminal echo and is stored only as a PBKDF2 hash.
 
 ## Project structure
 
-- `src/components` — React UI for the landing page and admin preview
+- `src/components` — React UI for the landing page and admin workspace
 - `src/layouts` — shared Astro HTML shell and Arabic-first document defaults
-- `src/pages` — server-rendered public, admin-preview, and API routes
-- `src/lib/auth` — Phase 1 authentication boundary and future integration notes
+- `src/pages` — server-rendered public, protected admin, and API routes
+- `src/lib/auth` — password hashing, server sessions, account lookup, and authorization rules
 - `src/lib/tenants` — tenant-isolation guidance for future server operations
 - `src/lib/database` — Cloudflare binding types and schema documentation
 - `src/lib/validation` — Zod API response schemas
@@ -46,4 +49,4 @@ This runs `wrangler d1 migrations apply website-factory --local`. It does not us
 
 ## Deliberately out of scope
 
-Authentication, website CRUD, templates, custom domains, payments, subscriptions, AI generation, and production deployment are not implemented. Admin UI routes remain preview-only shells. The customer API is unauthenticated as explicitly scoped for Phase 2 and must not be treated as private or production-ready access control.
+Website CRUD, templates, custom domains, payments, subscriptions, AI generation, and production deployment are not implemented. The admin pages remain operational placeholders, but access is protected. The Cloudflare adapter automatically provisions its `SESSION` KV binding when deployed; this project configures a strict eight-hour session cookie and stores admin accounts and login rate limits in additive D1 tables.

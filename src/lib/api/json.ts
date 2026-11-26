@@ -25,6 +25,26 @@ export function apiError(
   );
 }
 
+export function isSameOriginRequest(request: Request): boolean {
+  const origin = request.headers.get("origin");
+  if (!origin) return true;
+
+  try {
+    return new URL(origin).origin === new URL(request.url).origin;
+  } catch {
+    return false;
+  }
+}
+
+export function zodFieldErrors(error: z.ZodError): Record<string, string[]> {
+  const fields: Record<string, string[]> = {};
+  for (const issue of error.issues) {
+    const field = issue.path.length > 0 ? issue.path.map(String).join(".") : "_";
+    (fields[field] ??= []).push(issue.message);
+  }
+  return fields;
+}
+
 type JsonBodyResult<T> =
   | { success: true; data: T }
   | { success: false; response: Response };
@@ -115,7 +135,7 @@ export async function readValidatedJson<T>(
       response: apiError(
         "Request validation failed",
         400,
-        parsed.error.flatten().fieldErrors,
+        zodFieldErrors(parsed.error),
       ),
     };
   }

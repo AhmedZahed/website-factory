@@ -6,8 +6,7 @@ const customerEmailSchema = z
   .string()
   .trim()
   .toLowerCase()
-  .email()
-  .max(254)
+  .pipe(z.email().max(254))
   .nullable();
 
 export const createCustomerSchema = z

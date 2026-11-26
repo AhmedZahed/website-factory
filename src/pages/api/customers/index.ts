@@ -1,6 +1,11 @@
 import { env } from "cloudflare:workers";
 import type { APIRoute } from "astro";
-import { apiError, jsonResponse, readValidatedJson } from "../../../lib/api/json";
+import {
+  apiError,
+  jsonResponse,
+  readValidatedJson,
+  zodFieldErrors,
+} from "../../../lib/api/json";
 import {
   createCustomer,
   isUniqueConstraintError,
@@ -23,7 +28,7 @@ export const GET: APIRoute = async ({ request }) => {
     return apiError(
       "Query validation failed",
       400,
-      parsedQuery.error.flatten().fieldErrors,
+      zodFieldErrors(parsedQuery.error),
     );
   }
 

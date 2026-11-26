@@ -10,6 +10,7 @@ import {
   Globe2,
   LayoutDashboard,
   Layers3,
+  LogOut,
   PackageOpen,
   ShieldCheck,
   UsersRound,
@@ -56,7 +57,7 @@ const text = {
     platform: 'المنصة',
     principles: 'ما يهمنا',
     howItWorks: 'كيف تبدأ',
-    admin: 'معاينة الإدارة',
+    admin: 'دخول الإدارة',
     heroEyebrow: 'أساس رقمي هادئ للأعمال الصغيرة',
     heroBefore: 'حضورك على الإنترنت،',
     heroAccent: 'بوضوح أكبر.',
@@ -90,16 +91,16 @@ const text = {
     step3Title: 'انمُ في وقتك',
     step3Text: 'توسّع عندما تكون جاهزاً، دون تعقيد يسبق الحاجة.',
     ctaTitle: 'التأسيس الجيد يبدأ برؤية واضحة.',
-    ctaText: 'ألقِ نظرة على معاينة الأساس الإداري.',
+    ctaText: 'سجّل الدخول إلى مساحة الإدارة الآمنة.',
     footerNote: 'Website Factory — أساس رقمي للأعمال الصغيرة.',
     footerPreview: 'معاينة تأسيسية غير متصلة ببيانات تشغيلية.',
-    adminPreview: 'معاينة تأسيسية للإدارة',
-    adminMode: 'معاينة',
+    adminPreview: 'مساحة الإدارة',
+    adminMode: 'مسجّل الدخول',
     sidebarSection: 'مساحة العمل',
-    previewCardTitle: 'أساس قيد التأسيس',
-    previewCardText: 'هذه الواجهة معاينة فقط. لا يوجد تسجيل دخول أو تشغيل فعلي متصل.',
-    bannerTitle: 'معاينة غير موثّقة الدخول',
-    bannerText: 'هذه شاشة تأسيسية لواجهة الإدارة. لا توجد سجلات تشغيلية متصلة، ولا تمثل هذه المعاينة نظام دخول جاهزاً للإنتاج.',
+    previewCardTitle: 'وصول محمي',
+    previewCardText: 'يتطلب الوصول إلى صفحات الإدارة تسجيل الدخول.',
+    bannerTitle: 'جلسة موثّقة',
+    bannerText: 'أنت مسجّل الدخول إلى مساحة الإدارة المحمية.',
     dashboardSubtitle: 'لمحة عن بنية مساحة العمل المقترحة.',
     foundationTitle: 'أجزاء مساحة العمل',
     foundationSubtitle: 'عناصر واجهة أساسية — لا تعرض بيانات حقيقية.',
@@ -110,7 +111,7 @@ const text = {
     foundationC: 'القوالب والطلبات',
     foundationCDesc: 'مساحات مهيأة لتتكامل مع بنية المنتج مستقبلاً.',
     statusNotConnected: 'غير متصل',
-    phaseOne: 'المرحلة الأولى',
+    phaseOne: 'المرحلة الثالثة',
     noteTitle: 'لا توجد سجلات بعد',
     noteText: 'لا توجد بيانات أو حسابات أو نشاط تشغيلي معروض في هذه المعاينة.',
     previewFooter: 'الواجهة التأسيسية لا تتضمن عمليات فعلية أو بيانات مرتبطة.',
@@ -120,6 +121,7 @@ const text = {
     managementNote: 'ستعرض هذه المساحة محتواها عند ربط الخدمات والبيانات في مرحلة لاحقة.',
     goBack: 'العودة إلى النظرة العامة',
     openLanding: 'زيارة الصفحة الرئيسية',
+    logout: 'تسجيل الخروج',
     navHome: 'Website Factory',
     smallBusinesses: 'للأعمال الصغيرة',
   },
@@ -131,7 +133,7 @@ const text = {
     platform: 'The platform',
     principles: 'Our principles',
     howItWorks: 'How it starts',
-    admin: 'Admin preview',
+    admin: 'Admin sign in',
     heroEyebrow: 'A calmer digital foundation for small business',
     heroBefore: 'Your online presence,',
     heroAccent: 'with more clarity.',
@@ -165,16 +167,16 @@ const text = {
     step3Title: 'Grow at your own pace',
     step3Text: 'Expand when you are ready, without complexity arriving too soon.',
     ctaTitle: 'A good foundation starts with a clear view.',
-    ctaText: 'Take a look at the admin foundation preview.',
+    ctaText: 'Sign in to access the protected admin workspace.',
     footerNote: 'Website Factory — a digital foundation for small businesses.',
     footerPreview: 'Foundation preview, not connected to operational data.',
-    adminPreview: 'Admin foundation preview',
-    adminMode: 'Preview',
+    adminPreview: 'Admin workspace',
+    adminMode: 'Signed in',
     sidebarSection: 'Workspace',
-    previewCardTitle: 'A foundation in progress',
-    previewCardText: 'This interface is a preview only. No sign-in or operational system is connected.',
-    bannerTitle: 'Unauthenticated foundation preview',
-    bannerText: 'This is a foundation view of the admin interface. No operational records are connected, and this preview is not production-ready authentication.',
+    previewCardTitle: 'Protected access',
+    previewCardText: 'Sign in is required to access administration pages.',
+    bannerTitle: 'Authenticated session',
+    bannerText: 'You are signed in to the protected admin workspace.',
     dashboardSubtitle: 'A view of the proposed workspace foundations.',
     foundationTitle: 'Workspace foundations',
     foundationSubtitle: 'Interface building blocks — no live data shown.',
@@ -185,7 +187,7 @@ const text = {
     foundationC: 'Templates and orders',
     foundationCDesc: 'Spaces prepared to connect to the product foundation in the future.',
     statusNotConnected: 'Not connected',
-    phaseOne: 'Phase 1',
+    phaseOne: 'Phase 3',
     noteTitle: 'No records yet',
     noteText: 'No data, accounts, or operational activity is displayed in this preview.',
     previewFooter: 'The foundation interface includes no live operations or connected records.',
@@ -195,6 +197,7 @@ const text = {
     managementNote: 'This space can show its content when services and data are connected in a future phase.',
     goBack: 'Back to overview',
     openLanding: 'Visit the homepage',
+    logout: 'Sign out',
     navHome: 'Website Factory',
     smallBusinesses: 'For small businesses',
   },
@@ -328,6 +331,15 @@ function AdminPage({ page, language, labels, onToggle }: { page: Exclude<Website
   const isDashboard = page === 'dashboard';
   const pageTitle = pageNames[page][language];
   const Icon = routes.find((item) => item.page === page)?.icon ?? LayoutDashboard;
+  const handleLogout = async () => {
+    try {
+      const response = await fetch('/api/auth/logout', { method: 'POST' });
+      if (response.ok) window.location.replace('/admin/login');
+    } catch {
+      // Keep the current page if the logout request cannot reach the server.
+    }
+  };
+
   return (
     <div className="wf-admin">
       <aside className="wf-sidebar">
@@ -362,6 +374,14 @@ function AdminPage({ page, language, labels, onToggle }: { page: Exclude<Website
           <span className="wf-admin-crumb">{labels.adminPreview} / {pageTitle}</span>
           <div className="wf-header-actions">
             <LanguageButton language={language} onToggle={onToggle} labels={labels} />
+            <button
+              className="wf-button wf-button-secondary wf-button-small"
+              type="button"
+              onClick={handleLogout}
+              data-testid="button-admin-logout"
+            >
+              <LogOut size={14} aria-hidden="true" />{labels.logout}
+            </button>
             <a className="wf-button wf-button-secondary wf-button-small" href="/" data-testid="link-admin-home"><ArrowUpLeft size={14} aria-hidden="true" />{labels.openLanding}</a>
           </div>
         </header>

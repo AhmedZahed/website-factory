@@ -8,7 +8,10 @@
     "build": "astro build",
     "preview": "astro preview --host 0.0.0.0",
     "typecheck": "astro check",
-    "db:migrate:local": "wrangler d1 migrations apply website-factory --local"
+    "db:migrate:local": "wrangler d1 migrations apply website-factory --local",
+    "auth:create-account": "node --experimental-strip-types ./scripts/create-account.mjs",
+    "test:auth": "node --experimental-strip-types --test tests/auth.test.ts",
+    "test:auth:integration": "node --experimental-strip-types ./tests/auth.integration.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",

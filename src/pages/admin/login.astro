@@ -1,0 +1,237 @@
+---
+import "../../styles/global.css";
+
+const user = Astro.locals.authUser;
+if (user) return Astro.redirect("/admin");
+---
+
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="color-scheme" content="light" />
+    <title>تسجيل الدخول — Website Factory</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <main class="auth-shell">
+      <a class="auth-brand" href="/" aria-label="العودة إلى Website Factory">
+        <span class="auth-brand-mark" aria-hidden="true">WF</span>
+        <span><strong>Website Factory</strong><small>مساحة الإدارة</small></span>
+      </a>
+      <section class="auth-card" aria-labelledby="login-title">
+        <p class="auth-eyebrow">دخول آمن</p>
+        <h1 id="login-title">مرحباً بعودتك</h1>
+        <p class="auth-intro">سجّل الدخول للوصول إلى مساحة الإدارة.</p>
+        <form id="login-form">
+          <label for="email">البريد الإلكتروني</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            autocomplete="username"
+            inputmode="email"
+            maxlength="254"
+            required
+          />
+          <label for="password">كلمة المرور</label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            maxlength="128"
+            required
+          />
+          <p class="auth-message" id="login-message" role="status" aria-live="polite"></p>
+          <button class="auth-submit" type="submit">تسجيل الدخول</button>
+        </form>
+        <a class="auth-back" href="/">العودة إلى الصفحة الرئيسية</a>
+      </section>
+    </main>
+  </body>
+</html>
+
+<style>
+  .auth-shell {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 32px 20px;
+    color: #202b3e;
+    background:
+      radial-gradient(ellipse at 16% 18%, rgba(58, 132, 116, 0.11), transparent 34%),
+      #f7f5ef;
+    font-family: var(--font-sans, system-ui, sans-serif);
+  }
+
+  .auth-brand {
+    position: absolute;
+    top: 28px;
+    right: max(24px, calc((100vw - 1120px) / 2));
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .auth-brand-mark {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    border-radius: 13px;
+    color: white;
+    background: #202b3e;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .auth-brand strong,
+  .auth-brand small {
+    display: block;
+  }
+
+  .auth-brand small {
+    margin-top: 3px;
+    color: #7a7d7a;
+    font-size: 12px;
+  }
+
+  .auth-card {
+    width: min(100%, 440px);
+    padding: clamp(28px, 6vw, 48px);
+    border: 1px solid rgba(32, 43, 62, 0.1);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.82);
+    box-shadow: 0 24px 70px rgba(32, 43, 62, 0.09);
+  }
+
+  .auth-eyebrow {
+    margin: 0 0 12px;
+    color: #398170;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .auth-card h1 {
+    margin: 0;
+    font-size: clamp(28px, 5vw, 36px);
+    letter-spacing: -0.04em;
+  }
+
+  .auth-intro {
+    margin: 10px 0 30px;
+    color: #737a82;
+    line-height: 1.8;
+  }
+
+  .auth-card form {
+    display: grid;
+    gap: 11px;
+  }
+
+  .auth-card label {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 650;
+  }
+
+  .auth-card input {
+    min-height: 48px;
+    padding: 10px 13px;
+    border: 1px solid #d9ddd9;
+    border-radius: 10px;
+    color: #202b3e;
+    background: white;
+    font: inherit;
+    outline: none;
+  }
+
+  .auth-card input:focus-visible {
+    border-color: #398170;
+    box-shadow: 0 0 0 3px rgba(57, 129, 112, 0.16);
+  }
+
+  .auth-message {
+    min-height: 22px;
+    margin: 3px 0 0;
+    color: #a33737;
+    font-size: 13px;
+  }
+
+  .auth-submit {
+    min-height: 48px;
+    border: 0;
+    border-radius: 10px;
+    color: white;
+    background: #202b3e;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .auth-submit:disabled {
+    cursor: wait;
+    opacity: 0.7;
+  }
+
+  .auth-back {
+    display: inline-block;
+    margin-top: 24px;
+    color: #68716f;
+    font-size: 13px;
+    text-decoration: none;
+  }
+
+  .auth-back:hover {
+    color: #202b3e;
+    text-decoration: underline;
+  }
+</style>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("#login-form");
+  const message = document.querySelector<HTMLElement>("#login-message");
+  const submitButton = form?.querySelector<HTMLButtonElement>("button[type=submit]");
+
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!message || !submitButton) return;
+
+    const data = new FormData(form);
+    message.textContent = "";
+    submitButton.disabled = true;
+
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          email: data.get("email"),
+          password: data.get("password"),
+        }),
+      });
+
+      if (response.ok) {
+        window.location.replace("/admin");
+        return;
+      }
+
+      message.textContent =
+        response.status === 429
+          ? "محاولات كثيرة. يرجى الانتظار قبل المحاولة مجدداً."
+          : response.status === 401
+            ? "البريد الإلكتروني أو كلمة المرور غير صحيحة."
+            : "تعذر تسجيل الدخول الآن. حاول مجدداً.";
+    } catch {
+      message.textContent = "تعذر الاتصال بالخدمة. تحقق من اتصالك وحاول مجدداً.";
+    } finally {
+      submitButton.disabled = false;
+    }
+  });
+</script>
