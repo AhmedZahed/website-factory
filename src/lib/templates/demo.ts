@@ -236,9 +236,9 @@ const profile: Record<TemplateId, DemoProfile> = {
       "practice-areas": {
         title: { ar: "مجالات الممارسة", en: "Practice areas" },
         items: [
-          { title: { ar: "العقود", en: "Contracts" }, description: { ar: "يُضاف وصف الخدمات بعد مراجعته من المكتب.", en: "Add a firm-reviewed service description." } },
-          { title: { ar: "الأعمال", en: "Business" }, description: { ar: "يُضاف وصف الخدمات بعد مراجعته من المكتب.", en: "Add a firm-reviewed service description." } },
-          { title: { ar: "العمل", en: "Employment" }, description: { ar: "يُضاف وصف الخدمات بعد مراجعته من المكتب.", en: "Add a firm-reviewed service description." } },
+          { title: { ar: "مجال ممارسة — مثال ١", en: "Practice area — sample 1" }, description: { ar: "أضف اسم المجال ووصفه بعد مراجعة المكتب.", en: "The firm supplies and reviews this practice area." } },
+          { title: { ar: "مجال ممارسة — مثال ٢", en: "Practice area — sample 2" }, description: { ar: "أضف اسم المجال ووصفه بعد مراجعة المكتب.", en: "The firm supplies and reviews this practice area." } },
+          { title: { ar: "مجال ممارسة — مثال ٣", en: "Practice area — sample 3" }, description: { ar: "أضف اسم المجال ووصفه بعد مراجعة المكتب.", en: "The firm supplies and reviews this practice area." } },
         ],
       },
       qualifications: {
