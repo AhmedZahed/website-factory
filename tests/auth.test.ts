@@ -34,13 +34,26 @@ test("private routes require authentication except health and login/logout", () 
   assert.equal(isProtectedPath("/api/auth/logout"), false);
 });
 
-test("staff can work with customers but cannot delete or access admin APIs", () => {
+test("staff can access only explicitly permitted customer routes", () => {
   assert.equal(
     canAccessPrivateRoute("staff", "/api/customers", "GET"),
     true,
   );
   assert.equal(
+    canAccessPrivateRoute("staff", "/api/customers", "POST"),
+    true,
+  );
+  assert.equal(
     canAccessPrivateRoute("staff", "/api/customers/123", "PATCH"),
+    true,
+  );
+  assert.equal(canAccessPrivateRoute("staff", "/admin", "GET"), true);
+  assert.equal(
+    canAccessPrivateRoute("staff", "/admin/customers", "GET"),
+    true,
+  );
+  assert.equal(
+    canAccessPrivateRoute("staff", "/api/auth/me", "GET"),
     true,
   );
   assert.equal(
@@ -48,11 +61,31 @@ test("staff can work with customers but cannot delete or access admin APIs", () 
     false,
   );
   assert.equal(
+    canAccessPrivateRoute("staff", "/api/customers/123", "GET"),
+    false,
+  );
+  assert.equal(
     canAccessPrivateRoute("staff", "/api/admin/accounts", "GET"),
     false,
   );
   assert.equal(
+    canAccessPrivateRoute("staff", "/api/reports/export", "GET"),
+    false,
+  );
+  assert.equal(
+    canAccessPrivateRoute("staff", "/admin/websites", "GET"),
+    false,
+  );
+  assert.equal(
+    canAccessPrivateRoute("staff", "/api/auth/me", "POST"),
+    false,
+  );
+  assert.equal(
     canAccessPrivateRoute("admin", "/api/customers/123", "DELETE"),
+    true,
+  );
+  assert.equal(
+    canAccessPrivateRoute("admin", "/api/reports/export", "GET"),
     true,
   );
 });

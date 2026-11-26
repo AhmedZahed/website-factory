@@ -28,6 +28,7 @@ This runs `wrangler d1 migrations apply website-factory --local`. It does not us
 - `pnpm --filter @workspace/website-factory run build`
 - `pnpm --filter @workspace/website-factory run test:auth`
 - `pnpm --filter @workspace/website-factory run test:auth:integration` (requires the managed preview and local D1 migrations)
+- `pnpm --filter @workspace/website-factory run test:auth:live` (local-only; prompts securely and requires confirmation because it records failed login attempts)
 - `GET /api/health` returns `status`, `application`, and `environment`.
 - Customer API (authenticated): `GET` and `POST /api/customers`, `PATCH` and `DELETE /api/customers/:id`.
 - D1 migrations: `0001_initial_schema.sql`, `0002_customers_and_website_ownership.sql`, and `0003_admin_auth.sql`.

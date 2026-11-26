@@ -139,6 +139,10 @@ try {
     headers: { cookie: adminCookie },
   });
   assert.equal(adminCustomers.status, 200);
+  const adminWebsitesPage = await fetch(`${baseUrl}/admin/websites`, {
+    headers: { cookie: adminCookie },
+  });
+  assert.equal(adminWebsitesPage.status, 200);
 
   const adminDeleteMissing = await fetch(
     `${baseUrl}/api/customers/nonexistent-auth-test-id`,
@@ -172,12 +176,27 @@ try {
     headers: { cookie: staffCookie },
   });
   assert.equal(staffAdminPage.status, 200);
+  for (const path of [
+    "/admin/websites",
+    "/admin/templates",
+    "/admin/orders",
+  ]) {
+    const response = await fetch(`${baseUrl}${path}`, {
+      headers: { cookie: staffCookie },
+    });
+    assert.equal(response.status, 403, `${path} is admin-only`);
+  }
 
   const staffDelete = await fetch(
     `${baseUrl}/api/customers/nonexistent-auth-test-id`,
     { method: "DELETE", headers: { cookie: staffCookie, origin } },
   );
   assert.equal(staffDelete.status, 403);
+  const staffUnknownNestedRoute = await fetch(
+    `${baseUrl}/api/customers/123/private-export`,
+    { headers: { cookie: staffCookie } },
+  );
+  assert.equal(staffUnknownNestedRoute.status, 403);
 
   const staffLogout = await fetch(`${baseUrl}/api/auth/logout`, {
     method: "POST",
