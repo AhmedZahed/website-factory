@@ -1,6 +1,6 @@
 # Website Factory
 
-An Arabic-first Phase 1 foundation for a multi-tenant website-building SaaS. This phase includes a public landing page, an admin UI preview, Cloudflare Workers SSR configuration, local D1/R2 bindings, a D1 schema migration, and `GET /api/health`.
+An Arabic-first foundation for a multi-tenant website-building SaaS. It includes a public landing page, an admin UI preview, Cloudflare Workers SSR configuration, local D1/R2 bindings, D1 migrations, `GET /api/health`, and a Zod-validated customer API.
 
 ## Run locally
 
@@ -27,6 +27,8 @@ This runs `wrangler d1 migrations apply website-factory --local`. It does not us
 - `pnpm --filter @workspace/website-factory run typecheck`
 - `pnpm --filter @workspace/website-factory run build`
 - `GET /api/health` returns `status`, `application`, and `environment`.
+- Customer API: `GET` and `POST /api/customers`, `PATCH` and `DELETE /api/customers/:id`.
+- D1 migrations: `0001_initial_schema.sql` and the additive `0002_customers_and_website_ownership.sql`.
 
 ## Project structure
 
@@ -44,4 +46,4 @@ This runs `wrangler d1 migrations apply website-factory --local`. It does not us
 
 ## Deliberately out of scope
 
-Authentication, customer records, website creation, templates, custom domains, payments, subscriptions, AI generation, and production deployment are not implemented. Admin routes are preview-only shells with no connected operational records or admin API endpoints.
+Authentication, website CRUD, templates, custom domains, payments, subscriptions, AI generation, and production deployment are not implemented. Admin UI routes remain preview-only shells. The customer API is unauthenticated as explicitly scoped for Phase 2 and must not be treated as private or production-ready access control.
