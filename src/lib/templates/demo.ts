@@ -220,11 +220,11 @@ const profile: Record<TemplateId, DemoProfile> = {
       en: "A demo only. No credentials, licenses, or legal claims are invented.",
     },
     colors: {
-      primary: "#1F323C",
-      secondary: "#D4C49E",
-      accent: "#8A6D47",
-      background: "#F8F5EE",
-      text: "#26343A",
+      primary: "#172D46",
+      secondary: "#E7DDC8",
+      accent: "#A6814F",
+      background: "#F7F3E9",
+      text: "#263243",
     },
     headingFont: "editorial-serif",
     bodyFont: "arabic-sans",
@@ -235,10 +235,14 @@ const profile: Record<TemplateId, DemoProfile> = {
       },
       "practice-areas": {
         title: { ar: "مجالات الممارسة", en: "Practice areas" },
+        description: {
+          ar: "أمثلة توضيحية فقط؛ راجع مجالات الممارسة الفعلية قبل النشر.",
+          en: "Illustrative examples only; confirm the firm's actual practice areas before publishing.",
+        },
         items: [
-          { title: { ar: "مجال ممارسة — مثال ١", en: "Practice area — sample 1" }, description: { ar: "أضف اسم المجال ووصفه بعد مراجعة المكتب.", en: "The firm supplies and reviews this practice area." } },
-          { title: { ar: "مجال ممارسة — مثال ٢", en: "Practice area — sample 2" }, description: { ar: "أضف اسم المجال ووصفه بعد مراجعة المكتب.", en: "The firm supplies and reviews this practice area." } },
-          { title: { ar: "مجال ممارسة — مثال ٣", en: "Practice area — sample 3" }, description: { ar: "أضف اسم المجال ووصفه بعد مراجعة المكتب.", en: "The firm supplies and reviews this practice area." } },
+          { title: { ar: "المعاملات التجارية", en: "Commercial matters" }, description: { ar: "مثال توضيحي فقط؛ أضف نطاق الخدمات المعتمد من المكتب.", en: "Illustrative only; add the firm's approved service scope." } },
+          { title: { ar: "صياغة العقود", en: "Contract drafting" }, description: { ar: "مثال توضيحي فقط؛ أضف نطاق الخدمات المعتمد من المكتب.", en: "Illustrative only; add the firm's approved service scope." } },
+          { title: { ar: "تسوية النزاعات", en: "Dispute resolution" }, description: { ar: "مثال توضيحي فقط؛ أضف نطاق الخدمات المعتمد من المكتب.", en: "Illustrative only; add the firm's approved service scope." } },
         ],
       },
       qualifications: {
