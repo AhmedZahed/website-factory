@@ -9,6 +9,8 @@ interface DemoItem {
   title: { ar: string; en: string };
   description: { ar: string; en: string };
   category?: { ar: string; en: string };
+  meta?: { ar: string; en: string };
+  featured?: boolean;
 }
 
 interface DemoSection {
@@ -203,14 +205,14 @@ const profile: Record<TemplateId, DemoProfile> = {
     },
   },
   "builtin-restaurants-cafes-juice": {
-    name: { ar: "مائدة الحي", en: "Neighborhood Table" },
+    name: { ar: "دار الليمون", en: "Dar Al Lemon" },
     tagline: {
-      ar: "قائمة ومعلومات زيارة في مكان واحد.",
-      en: "Menu and visit information in one place.",
+      ar: "نكهات طازجة، وقهوة على مهل، ومكان يجمعنا.",
+      en: "Fresh plates, slow coffee, and a place to gather.",
     },
     description: {
-      ar: "معاينة لمطعم أو مقهى. حدّث القائمة والأسعار قبل النشر.",
-      en: "A restaurant or cafe sample. Verify menu items and prices before publishing.",
+      ar: "مساحة نموذجية لمطعم أو مقهى أو مخبز. استبدل النصوص والصور النموذجية بتفاصيل المكان المعتمدة.",
+      en: "A sample hospitality profile for a restaurant, cafe, or bakery. Replace the sample copy and imagery with verified details about your place.",
     },
     colors: {
       primary: "#562A27",
@@ -223,17 +225,39 @@ const profile: Record<TemplateId, DemoProfile> = {
     bodyFont: "system",
     sections: {
       menu: {
-        title: { ar: "من القائمة", en: "From the menu" },
-        description: { ar: "أمثلة شكلية فقط؛ أضف الأصناف والأسعار الصحيحة.", en: "Visual examples only; add verified menu items and prices." },
+        title: { ar: "من المطبخ إلى المائدة", en: "From our kitchen to your table" },
+        description: { ar: "أصناف وصور نموذجية قابلة للاستبدال؛ أضف القائمة والأسعار المعتمدة فقط.", en: "Replaceable sample dishes and imagery. Add your approved menu and verified prices only." },
         items: [
-          { title: { ar: "صنف مميز", en: "Featured dish" }, description: { ar: "الوصف والسعر يضافان من المطعم.", en: "The restaurant supplies the description and price." } },
-          { title: { ar: "مشروب موسمي", en: "Seasonal drink" }, description: { ar: "الوصف والسعر يضافان من المطعم.", en: "The restaurant supplies the description and price." } },
-          { title: { ar: "اختيار يومي", en: "Daily choice" }, description: { ar: "الوصف والسعر يضافان من المطعم.", en: "The restaurant supplies the description and price." } },
+          { title: { ar: "طبق الموسم", en: "The seasonal plate" }, description: { ar: "مثال قابل للاستبدال — أضف مكونات الطبق ووصفه المعتمد.", en: "Replaceable sample — add the confirmed ingredients and description." }, category: { ar: "من المطبخ", en: "From the kitchen" }, featured: true },
+          { title: { ar: "خبز الصباح", en: "Morning bake" }, description: { ar: "مثال قابل للاستبدال — اكتب وصف المخبوزات التي تقدمها.", en: "Replaceable sample — describe the baked goods you serve." }, category: { ar: "المخبز", en: "Bakery" } },
+          { title: { ar: "قهوة اليوم", en: "Coffee, your way" }, description: { ar: "مثال قابل للاستبدال — أضف تفاصيل القهوة والتحضير.", en: "Replaceable sample — add the coffee and preparation details." }, category: { ar: "من البار", en: "From the bar" }, featured: true },
+          { title: { ar: "عصير الحمضيات", en: "Citrus press" }, description: { ar: "مثال قابل للاستبدال — وضّح المكونات المتاحة.", en: "Replaceable sample — list the ingredients you offer." }, category: { ar: "من البار", en: "From the bar" } },
+          { title: { ar: "حلوى الدار", en: "Something sweet" }, description: { ar: "مثال قابل للاستبدال — أضف وصف الحلوى المعتمد.", en: "Replaceable sample — add the confirmed dessert description." }, category: { ar: "من المخبز", en: "Bakery" } },
+          { title: { ar: "طبق للمشاركة", en: "A plate to share" }, description: { ar: "مثال قابل للاستبدال — أضف التفاصيل التي تهم ضيوفك.", en: "Replaceable sample — add the details your guests need." }, category: { ar: "من المطبخ", en: "From the kitchen" } },
         ],
       },
+      story: {
+        title: { ar: "كل شيء يبدأ بمكوّن طازج ومائدة مفتوحة.", en: "It starts with something fresh, and a table left open." },
+        description: { ar: "قصة نموذجية قابلة للاستبدال بكلمات المكان وأسلوبه الحقيقي.", en: "Replace this sample story with the real voice and history of your place." },
+        items: [
+          { title: { ar: "من أول رشفة", en: "The first sip" }, description: { ar: "هذه مساحة لقصة المكان: ما الذي يلهم المطبخ، ومن أين تأتي النكهات، وكيف تحبون استقبال ضيوفكم. النص والصورة هنا أمثلة قابلة للاستبدال.", en: "A space for your story: what inspires the kitchen, where the flavours come from, and how you welcome people in. This copy and image are replaceable samples." } },
+        ],
+      },
+      gallery: {
+        title: { ar: "مساحة للقاء، وللبقاء قليلاً.", en: "A space to meet, and stay a little." },
+        description: { ar: "صور نموذجية قابلة للاستبدال بصور المكان والأطباق الأصلية.", en: "Replaceable sample photos; add original images of your dishes and space." },
+      },
       "opening-hours": {
-        title: { ar: "أوقات العمل", en: "Opening hours" },
-        description: { ar: "أضف الجدول المعتمد قبل النشر.", en: "Add verified hours before publishing." },
+        title: { ar: "تعالوا حين يناسبكم", en: "Drop in when it suits you" },
+        description: { ar: "أضف أوقات العمل المعتمدة قبل النشر.", en: "Add confirmed opening hours before publishing." },
+      },
+      locations: {
+        title: { ar: "نلتقي على المائدة", en: "Let’s meet around the table" },
+        description: { ar: "أضف الفروع وعناوينها أو روابط الخرائط المعتمدة.", en: "Add confirmed branches, addresses, or safe map links." },
+      },
+      contact: {
+        title: { ar: "للطلب أو الحجز، يسعدنا تواصلكم", en: "For orders or reservations, get in touch" },
+        description: { ar: "تظهر وسائل التواصل عند إضافتها إلى بيانات النشاط.", en: "Contact and reservation actions appear when you add your business details." },
       },
     },
   },
@@ -367,7 +391,21 @@ export function createDemoCustomization(
           },
         },
       } : {}),
-      gallery: template.id === "builtin-contracting-real-estate" ? [
+      ...(template.id === "builtin-restaurants-cafes-juice" ? {
+        hero: {
+          src: "/images/restaurants-hero.jpg",
+          alt: {
+            ar: "مائدة طعام ومشروب حمضيات — صورة مفاهيمية نموذجية قابلة للاستبدال",
+            en: "A styled meal and citrus drink — replaceable concept sample image",
+          },
+        },
+      } : {}),
+      gallery: template.id === "builtin-restaurants-cafes-juice" ? [
+        { src: "/images/restaurants-menu-meal.jpg", alt: { ar: "طبق نباتي وخبز — صورة نموذجية قابلة للاستبدال", en: "Plant-forward plate and bread — replaceable sample image" } },
+        { src: "/images/restaurants-menu-coffee.jpg", alt: { ar: "فنجان قهوة — صورة نموذجية قابلة للاستبدال", en: "A cup of coffee — replaceable sample image" } },
+        { src: "/images/restaurants-menu-juice.jpg", alt: { ar: "عصير حمضيات — صورة نموذجية قابلة للاستبدال", en: "Fresh citrus drink — replaceable sample image" } },
+        { src: "/images/restaurants-atmosphere.jpg", alt: { ar: "أجواء مقهى — صورة نموذجية قابلة للاستبدال", en: "Cafe interior atmosphere — replaceable sample image" } },
+      ] : template.id === "builtin-contracting-real-estate" ? [
         {
           src: "/images/contracting-residential-concept.jpg",
           alt: { ar: "تصور سكني توضيحي، وليس مشروعاً منفذاً", en: "Residential concept image, not a completed project" },
