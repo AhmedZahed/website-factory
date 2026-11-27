@@ -13,8 +13,9 @@ export const TEMPLATE_REGISTRY = [
     supportedSections: [
       "hero",
       "services",
-      "process",
       "benefits",
+      "process",
+      "locations",
       "testimonials",
       "faq",
       "contact",

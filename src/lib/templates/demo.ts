@@ -50,18 +50,57 @@ const profile: Record<TemplateId, DemoProfile> = {
     sections: {
       services: {
         title: { ar: "خدماتنا", en: "Our services" },
+        description: {
+          ar: "فئات توضيحية؛ حدّثها لتطابق الخدمات التي يقدمها نشاطك فعلياً.",
+          en: "Illustrative categories; update these to match the services your business actually offers.",
+        },
         items: [
-          { title: { ar: "صيانة التكييف", en: "Air conditioning" }, description: { ar: "تفاصيل الخدمة يضيفها صاحب العمل.", en: "Service details supplied by the business." } },
-          { title: { ar: "أعمال السباكة", en: "Plumbing" }, description: { ar: "تفاصيل الخدمة يضيفها صاحب العمل.", en: "Service details supplied by the business." } },
-          { title: { ar: "الصيانة الكهربائية", en: "Electrical maintenance" }, description: { ar: "تفاصيل الخدمة يضيفها صاحب العمل.", en: "Service details supplied by the business." } },
+          { title: { ar: "صيانة التكييف", en: "Air conditioning" }, description: { ar: "أضف تفاصيل الفحص أو الصيانة التي يقدمها نشاطك.", en: "Describe the inspection or maintenance your business offers." } },
+          { title: { ar: "أعمال السباكة", en: "Plumbing" }, description: { ar: "أدرج الإصلاحات أو التركيبات المتاحة من فريقك.", en: "List the repairs or installations available from your team." } },
+          { title: { ar: "الصيانة الكهربائية", en: "Electrical maintenance" }, description: { ar: "أضف أنواع الأعمال الكهربائية التي يقدمها نشاطك.", en: "Describe the electrical work your business offers." } },
+          { title: { ar: "التنظيف", en: "Cleaning" }, description: { ar: "وضّح أنواع المساحات أو جداول التنظيف المتاحة.", en: "Describe the spaces or cleaning schedules you support." } },
+          { title: { ar: "مكافحة الآفات", en: "Pest control" }, description: { ar: "أضف الآفات وخيارات المعالجة التي يتعامل معها فريقك.", en: "List the pests and treatment options your team handles." } },
+          { title: { ar: "صيانة منزلية عامة", en: "General home maintenance" }, description: { ar: "أدرج الإصلاحات والمهام المنزلية التي يقدمها نشاطك.", en: "List the home repairs and tasks your business offers." } },
         ],
       },
       process: {
         title: { ar: "خطوات العمل", en: "How it works" },
+        description: {
+          ar: "خطوات توضيحية؛ استبدلها بآلية الطلب الفعلية لديك.",
+          en: "Illustrative steps; replace these with your actual request process.",
+        },
         items: [
           { title: { ar: "تواصل", en: "Get in touch" }, description: { ar: "اختر وسيلة التواصل المناسبة.", en: "Choose the contact method that works for you." } },
           { title: { ar: "تحديد الاحتياج", en: "Describe the work" }, description: { ar: "أضف تفاصيل الخدمة المطلوبة.", en: "Share the service details you need." } },
           { title: { ar: "تأكيد الموعد", en: "Confirm a time" }, description: { ar: "تُضاف آلية المواعيد من صاحب العمل.", en: "The business can add its appointment process." } },
+        ],
+      },
+      locations: {
+        title: { ar: "أين نقدم الخدمة؟", en: "Where we work" },
+        description: { ar: "تُضاف المدن والأحياء التي يغطيها النشاط.", en: "Add the towns and neighborhoods your team covers." },
+      },
+      benefits: {
+        title: { ar: "لماذا تختارنا؟", en: "Why choose us?" },
+        description: {
+          ar: "أمثلة توضيحية فقط؛ اعتمد معايير الخدمة الفعلية قبل النشر.",
+          en: "Illustrative examples only; confirm your actual service standards before publishing.",
+        },
+        items: [
+          { title: { ar: "وضوح نطاق العمل", en: "Clear scope" }, description: { ar: "وضّح العمل المطلوب وأي تكاليف متوقعة قبل البدء.", en: "Clarify the requested work and any applicable cost before starting." } },
+          { title: { ar: "تنظيم الزيارة", en: "A planned visit" }, description: { ar: "اتفق على وقت الزيارة وتفاصيل الدخول إلى الموقع.", en: "Agree on a visit time and any site-access details." } },
+          { title: { ar: "تحديثات واضحة", en: "Clear updates" }, description: { ar: "اشرح أي تغيير والخطوة التالية بلغة مباشرة.", en: "Explain any changes and next steps in plain language." } },
+        ],
+      },
+      faq: {
+        title: { ar: "أسئلة شائعة", en: "Frequently asked questions" },
+        description: {
+          ar: "أمثلة توضيحية؛ راجع الأسعار والمواعيد ونطاق الخدمة قبل النشر.",
+          en: "Illustrative examples; confirm pricing, availability, and service scope before publishing.",
+        },
+        items: [
+          { title: { ar: "كيف أطلب زيارة؟", en: "How do I request a visit?" }, description: { ar: "شارك وصف المشكلة وموقعها والوقت المفضل، ثم أكّد التفاصيل مع النشاط.", en: "Share the issue, location, and preferred time, then confirm details with the business." } },
+          { title: { ar: "هل تخدمون منطقتي؟", en: "Do you cover my area?" }, description: { ar: "أرسل اسم المدينة أو الحي ليتأكد النشاط من نطاق الخدمة الحالي.", en: "Send your city or neighborhood so the business can confirm its current service area." } },
+          { title: { ar: "هل يمكن طلب أكثر من خدمة؟", en: "Can I request more than one service?" }, description: { ar: "اذكر كل مهمة في طلبك ليتم تأكيد النطاق والتوفر.", en: "List each task in your request so the scope and availability can be confirmed." } },
         ],
       },
     },
@@ -283,7 +322,18 @@ export function createDemoCustomization(
         body: demo.bodyFont,
       },
     },
-    images: { gallery: [] },
+    images: {
+      ...(template.id === "builtin-services-maintenance" ? {
+        hero: {
+          src: "/images/services-maintenance-hero.jpg",
+          alt: {
+            ar: "فني صيانة يفحص وحدة تكييف داخل منزل",
+            en: "A maintenance technician inspecting a home air-conditioning unit",
+          },
+        },
+      } : {}),
+      gallery: [],
+    },
     sections: template.supportedSections.map((type, order) => ({
       id: `${template.slug}-${type}`,
       type,
