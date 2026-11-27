@@ -8,6 +8,7 @@ import type { TemplateId } from "./registry.ts";
 interface DemoItem {
   title: { ar: string; en: string };
   description: { ar: string; en: string };
+  category?: { ar: string; en: string };
 }
 
 interface DemoSection {
@@ -126,18 +127,43 @@ const profile: Record<TemplateId, DemoProfile> = {
     bodyFont: "system",
     sections: {
       projects: {
-        title: { ar: "نماذج للمشاريع", en: "Project examples" },
-        description: { ar: "أضف صور ووصف المشاريع بعد مراجعة بياناتها.", en: "Add project images and descriptions after verifying their details." },
+        title: { ar: "دراسات مكانية", en: "Studies in place" },
+        description: { ar: "أمثلة مفاهيمية للمعاينة فقط، وليست مشاريع منفذة أو موثقة.", en: "Illustrative demo concepts only; these are not completed or documented projects." },
         items: [
-          { title: { ar: "مشروع سكني — مثال", en: "Residential project — sample" }, description: { ar: "مساحة مخصصة لبيانات مشروع معتمد.", en: "A placeholder for a verified project." } },
-          { title: { ar: "مساحة تجارية — مثال", en: "Commercial space — sample" }, description: { ar: "مساحة مخصصة لبيانات مشروع معتمد.", en: "A placeholder for a verified project." } },
+          { title: { ar: "فناء من الحجر والظل", en: "Stone & shade courtyard" }, description: { ar: "تصور سكني توضيحي؛ استبدل الوصف بمشروع موثق تملكه.", en: "Illustrative residential concept. Replace with a verified project you own." }, category: { ar: "سكني", en: "Residential" } },
+          { title: { ar: "حافة مدنية", en: "Civic edge" }, description: { ar: "تصور لمساحة تجارية؛ ليس مشروعاً منفذاً أو عميلاً حقيقياً.", en: "Commercial-space concept; not a completed project or real client." }, category: { ar: "تجاري", en: "Commercial" } },
+          { title: { ar: "امتداد صناعي", en: "Industrial volume" }, description: { ar: "تصور صناعي توضيحي قابل للاستبدال بصورك الأصلية.", en: "Illustrative industrial concept, ready to be replaced by your own photography." }, category: { ar: "صناعي", en: "Industrial" } },
         ],
       },
       services: {
-        title: { ar: "مجالات العمل", en: "Areas of work" },
+        title: { ar: "فكرة متماسكة، من الموقع إلى التفاصيل", en: "One coherent idea, from site to detail" },
+        description: { ar: "قدرات توضيحية قابلة للتعديل؛ اعرض ما يقدمه فريقك فعلياً فقط.", en: "Editable sample capabilities; keep only the services your team genuinely offers." },
         items: [
-          { title: { ar: "تنفيذ المشاريع", en: "Project delivery" }, description: { ar: "تُضاف التفاصيل والنطاق من الشركة.", en: "Scope and details are supplied by the company." } },
-          { title: { ar: "إدارة العقارات", en: "Property management" }, description: { ar: "تُضاف الخدمات المتاحة من الشركة.", en: "Available services are supplied by the company." } },
+          { title: { ar: "التصميم المعماري", en: "Architectural design" }, description: { ar: "تُضاف مراحل التصميم والمخرجات المعتمدة من المكتب.", en: "Add the design stages and deliverables confirmed by the studio." } },
+          { title: { ar: "التصميم الداخلي", en: "Interior design" }, description: { ar: "وضح نطاق التصميم الداخلي والمواد التي يعمل بها الفريق.", en: "Describe your interior-design scope and the materials your team works with." } },
+          { title: { ar: "التنفيذ والمقاولات", en: "Construction & contracting" }, description: { ar: "أدرج أنواع التنفيذ ونطاق الأعمال المتاح فعلياً.", en: "List the construction types and scope your company actually undertakes." } },
+          { title: { ar: "التطوير العقاري", en: "Real estate development" }, description: { ar: "أضف خدمات التطوير أو إدارة الأصول التي يقدمها نشاطك.", en: "Add development or asset-management services your business provides." } },
+        ],
+      },
+      process: {
+        title: { ar: "طريقة العمل", en: "A way of working" },
+        description: { ar: "تسلسل نموذجي؛ عدّله ليتطابق مع إجراءات فريقك الفعلية.", en: "A suggested sequence; edit it to match your team's real process." },
+        items: [
+          { title: { ar: "الاستماع إلى brief المشروع", en: "Understand the brief" }, description: { ar: "نطاق وموقع وأولويات — تُحدد التفاصيل مع العميل.", en: "Scope, site and priorities, confirmed together with the client." } },
+          { title: { ar: "تطوير الرؤية", en: "Develop the vision" }, description: { ar: "تُوضح مخرجات التصميم والجدول بعد مراجعة احتياج المشروع.", en: "Agree design deliverables and timing after reviewing the project's needs." } },
+          { title: { ar: "التنسيق والتنفيذ", en: "Coordinate & deliver" }, description: { ar: "أضف مراحل التنسيق والتنفيذ التي يعتمدها فريقك.", en: "Add the coordination and delivery stages your team follows." } },
+        ],
+      },
+      testimonials: {
+        title: { ar: "شهادات العملاء", en: "Client voices" },
+        description: { ar: "لا توجد شهادات في المعاينة. أضف مراجعات حقيقية بعد موافقة أصحابها.", en: "No testimonials are included in this preview. Add genuine feedback with permission." },
+      },
+      faq: {
+        title: { ar: "قبل أن نبدأ", en: "Before we begin" },
+        description: { ar: "أسئلة نموذجية؛ راجع الإجابات لتطابق شروط عملك.", en: "Sample questions; revise the answers to reflect your actual terms." },
+        items: [
+          { title: { ar: "ما المعلومات اللازمة لبدء النقاش؟", en: "What should I share to start a discussion?" }, description: { ar: "موجز المشروع والموقع والجدول المتوقع وأي ملفات متاحة تساعد على فهم النطاق.", en: "A project brief, site, expected timeline and available files help establish the scope." } },
+          { title: { ar: "هل الصور المعروضة مشاريع منفذة؟", en: "Are the images completed projects?" }, description: { ar: "لا. جميع الصور الافتراضية تصورات توضيحية ويجب استبدالها بأعمال معتمدة قبل النشر.", en: "No. Default images are illustrative concepts and should be replaced with approved work before publishing." } },
         ],
       },
     },
@@ -323,6 +349,15 @@ export function createDemoCustomization(
       },
     },
     images: {
+      ...(template.id === "builtin-contracting-real-estate" ? {
+        hero: {
+          src: "/images/contracting-residential-concept.jpg",
+          alt: {
+            ar: "تصور معماري توضيحي لمنزل معاصر وفناء، صورة قابلة للاستبدال",
+            en: "Illustrative concept of a contemporary home and courtyard; replaceable demo image",
+          },
+        },
+      } : {}),
       ...(template.id === "builtin-services-maintenance" ? {
         hero: {
           src: "/images/services-maintenance-hero.jpg",
@@ -332,7 +367,20 @@ export function createDemoCustomization(
           },
         },
       } : {}),
-      gallery: [],
+      gallery: template.id === "builtin-contracting-real-estate" ? [
+        {
+          src: "/images/contracting-residential-concept.jpg",
+          alt: { ar: "تصور سكني توضيحي، وليس مشروعاً منفذاً", en: "Residential concept image, not a completed project" },
+        },
+        {
+          src: "/images/contracting-commercial-concept.jpg",
+          alt: { ar: "تصور تجاري توضيحي، وليس مشروعاً منفذاً", en: "Commercial concept image, not a completed project" },
+        },
+        {
+          src: "/images/contracting-industrial-concept.jpg",
+          alt: { ar: "تصور صناعي توضيحي، وليس مشروعاً منفذاً", en: "Industrial concept image, not a completed project" },
+        },
+      ] : [],
     },
     sections: template.supportedSections.map((type, order) => ({
       id: `${template.slug}-${type}`,
